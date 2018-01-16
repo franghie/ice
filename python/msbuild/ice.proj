@@ -20,12 +20,19 @@
         <Exec Command="$(NuGetExe) restore $(MSBuildThisFileDirectory)ice.sln"/>
     </Target>
 
+    <ItemDefinitionGroup>
+        <SliceCompile>
+            <OutputDir>$(MSBuildThisFileDirectory)..\python</OutputDir>
+            <AdditionalOptions>--checksum</AdditionalOptions>
+        </SliceCompile>
+    </ItemDefinitionGroup>
+
     <ItemGroup>
         <SliceCompile Include="..\..\slice\Ice\*.ice;
                                ..\..\slice\Glacier2\*.ice"
                       Exclude="..\..\slice\Ice\Metrics.ice;
                                ..\..\slice\Glacier2\Metrics.ice">
-            <AdditionalOptions>--no-package</AdditionalOptions>
+            <AdditionalOptions>--no-package %(AdditionalOptions)</AdditionalOptions>
         </SliceCompile>
         <SliceCompile Include="..\..\slice\Glacier2\Metrics.ice;
                                ..\..\slice\Ice\Metrics.ice;
@@ -50,7 +57,7 @@
     <Target Name="SliceCompile" BeforeTargets="Build"
             Condition="@(SliceCompile) != ''">
         <MakeDir Directories="$(SliceCompileOutputDir)"/>
-        <Exec Command="$(IceToolsPath)\slice2py.exe --output-dir $(MSBuildThisFileDirectory)..\python -I$(IceHome)\slice %(SliceCompile.AdditionalOptions) @(SliceCompile->'%(Identity)', ' ')" />
+        <Exec Command="$(IceToolsPath)\slice2py.exe --output-dir %(SliceCompile.OutputDir) -I$(IceHome)\slice %(SliceCompile.AdditionalOptions) @(SliceCompile->'%(Identity)', ' ')" />
     </Target>
 
     <Target Name="SliceCompileClean" BeforeTargets="Clean">
