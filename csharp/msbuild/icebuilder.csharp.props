@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <!--
-     This property file is included by Ice Builder when building
-     CSharp projects using the source distribution
-    -->
-
-    <!--
      Guess the platform and configuration used with this build
     -->
     <PropertyGroup Condition="Exists('$(IceHome)\cpp\bin\$(Platform)\$(Configuration)\slice2cs.exe')">
