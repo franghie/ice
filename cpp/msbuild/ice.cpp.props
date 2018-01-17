@@ -28,16 +28,16 @@
 
   <!-- Guess the Platform for C++ builds -->
   <PropertyGroup Condition="'$(Platform)'=='Win32'">
-      <Ice_Platform>Win32</Ice_Platform>
+      <IcePlatform>Win32</IcePlatform>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Platform)'=='x64'">
-      <Ice_Platform>x64</Ice_Platform>
+      <IcePlatform>x64</IcePlatform>
   </PropertyGroup>
 
   <!-- When building UWP ARM we use the x64 Slice compilers -->
   <PropertyGroup Condition="'$(Platform)'=='ARM'">
-      <Ice_Platform>Win32</Ice_Platform>
+      <IcePlatform>Win32</IcePlatform>
   </PropertyGroup>
 
   <!-- C++98 is the default mapping -->
@@ -47,7 +47,7 @@
 
   <PropertyGroup>
       <Path>$(IceHome)\cpp\bin\$(Platform)\$(IceConfiguration);$(Path)</Path>
-      <IceToolsPath>$(IceHome)\cpp\bin\$(Ice_Platform)\$(IceConfiguration)</IceToolsPath>
+      <IceToolsPath>$(IceHome)\cpp\bin\$(IcePlatform)\$(IceConfiguration)</IceToolsPath>
   </PropertyGroup>
 
   <!--
